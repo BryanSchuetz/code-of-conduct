@@ -33,15 +33,49 @@
           <div class="additional-resoruces">
             <h3>Additional Resources</h3>
             <ul>
-              {% for asset in current.assets %}
-                {% if asset.meta.resource %}
-                  {% if asset.meta.url %}
-                    <li><a href=" {{ asset.meta.url }}"> {{ asset.meta.resource }} </a></li>
-                  {% else %}
+              {% if current.title == "Your Responsibility" %}
+                <li><strong>2019</strong></li>
+                <ul>
+                {% for asset in current.assets %}
+                  {% if asset.meta.resource contains "2019" %}
                     <li><a href=" {{ asset.url }}"> {{ asset.meta.resource }} </a></li>
                   {% endif %}
-                {% endif %}
-              {% endfor %}
+                {% endfor %}
+                </ul>
+                <li><strong>2018</strong></li>
+                <ul>
+                {% for asset in current.assets %}
+                  {% if asset.meta.resource contains "2018" %}
+                    <li><a href=" {{ asset.url }}"> {{ asset.meta.resource }} </a></li>
+                  {% endif %}
+                {% endfor %}
+                </ul>
+                <li><strong>2017</strong></li>
+                <ul>
+                {% for asset in current.assets %}
+                  {% if asset.meta.resource contains "2017" %}
+                    <li><a href=" {{ asset.url }}"> {{ asset.meta.resource }} </a></li>
+                  {% endif %}
+                {% endfor %}
+                </ul>
+                {% for asset in current.assets %}
+                  {% unless asset.meta.resource contains "2019" or asset.meta.resource contains "2018" or asset.meta.resource contains "2017" %}
+                      {% if asset.meta.resource %}
+                      <li><a href="{{ asset.url }}">{{ asset.meta.resource }}</a></li>
+                    {% endif %}
+                  {% endunless %}
+                {% endfor %}
+              {% else %}
+                {% for asset in current.assets %}
+                  {% if asset.meta.resource %}
+                    {% if asset.meta.url %}
+                      <li><a href=" {{ asset.meta.url }}"> {{ asset.meta.resource }} </a></li>
+                    {% else %}
+                      <li><a href=" {{ asset.url }}"> {{ asset.meta.resource }} </a></li>
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+            {% endif %}
             </ul>
           </div>
         {% endif %}
